@@ -25,7 +25,7 @@
                                 <tr>
                                     <th scope="col">IMAGE</th>
                                     <th scope="col">TITLE</th>
-                                    <th scope="col">CHECKOUT BOOK DATE</th>
+                                    <th scope="col">CHECKOUT BOOK</th>
                                     <th scope="col">STOCK</th>
                                     <th scope="col" style="width: 20%">ACTIONS</th>
                                 </tr>
