@@ -1,50 +1,17 @@
 <?php
-use Illuminate\Support\Arr;
+
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard', ['title' => 'Dashboard']);
 });
 Route::get('/posts', function () {
-    return view('posts', [
-        'title' => 'Blog', 
-        'posts' => [
-            [
-                'id' => '1',
-                'title' => 'Article 1',
-                'author' => 'Zakaria Ramadan',
-                'textContent' => '111111111111111111Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nesciunt quaerat, recusandae modi saepe dolor tempora veniam voluptatibus eligendi. Eaque itaque architecto recusandae voluptate fuga similique consequuntur doloribus voluptatibus odio!'
-            ],
-            [
-                'id' => '2',
-                'title' => 'article 2',
-                'author' => 'Radika Nur',
-                'textContent' => '222222222222222Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nesciunt quaerat, recusandae modi saepe dolor tempora veniam voluptatibus eligendi. Eaque itaque architecto recusandae voluptate fuga similique consequuntur doloribus voluptatibus odio!'
-            ]
-        ]
-    ]);
+    return view('posts', ['title' => 'Blog', 'posts' => Post::all()]);
 });
 
-Route::get('/posts/{id}', function($id) {
-    $posts = [
-                [
-                'id' => '1',
-                'title' => 'Article 1',
-                'author' => 'Zakaria Ramadan',
-                'textContent' => '111111111111111111Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nesciunt quaerat, recusandae modi saepe dolor tempora veniam voluptatibus eligendi. Eaque itaque architecto recusandae voluptate fuga similique consequuntur doloribus voluptatibus odio!'
-            ],
-                [
-                'id' => '2',
-                'title' => 'article 2',
-                'author' => 'Radika Nur',
-                'textContent' => '222222222222222Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nesciunt quaerat, recusandae modi saepe dolor tempora veniam voluptatibus eligendi. Eaque itaque architecto recusandae voluptate fuga similique consequuntur doloribus voluptatibus odio!'
-            ]
-        ];
-
-    $post = Arr::first($posts, function ($post) use ($id) {
-        return $post['id'] == $id;
-    });
-    dd($post);
+Route::get('/posts/{post:slug}', function(Post $post) {
+    return view('post', ['title' => 'Single Post', 'post' => $post]);
 });
 
 Route::get('/about', function () {

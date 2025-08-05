@@ -1,15 +1,17 @@
 <x-layout>
-  @foreach ($posts as $post)
-  
   <x-slot:title>{{$title}}</x-slot:title>
-  <div class="max-w-screen-md">
-
-    <h1 class="text-3xl font-bold text-black">{{ $post['title'] }}</h1>
-    <p class="mb-5 font-light">{{ $post['author'] }}</p>
-    
-      <p class="font-light">{{ Str::limit($post['textContent'], 100) }}</p>
-
-      <a href="/posts/{{ $post['id']}}" class="text-md text-blue-500">Read More &raquo;</a>
+  <div class="container grid grid-cols-1 gap-10">
+  @foreach ($posts as $post)
+    <div class="max-w-screen-md bg-slate-400 rounded-md">
+      
+      <h1 class="text-3xl font-bold text-black capitalize">{{ $post['title'] }}</h1>
+      <p class="mb-5 font-light capitalize">{{ $post['author'] }} | {{ $post['created_at']->diffForHumans() }}</p>
+      
+      <p class="font-light">{{ Str::limit($post['content'], 100) }}</p>
+      
+      <a href="/posts/{{ $post['slug']}}" class="text-md text-blue-500">Read More &raquo;</a>
+      <hr>
+    </div>
+    @endforeach
   </div>
-  @endforeach
 </x-layout>
