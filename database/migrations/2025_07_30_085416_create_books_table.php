@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('publisher');
             $table->text('description');
+            $table->enum('stat-book', ['available', 'borrowed']);
             $table->date('pub_date');
-            $table->foreignId('borrowing_id')->constrained('book_status')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained('categorys')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }
